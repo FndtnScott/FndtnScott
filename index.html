@@ -2,11 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="robots" content="noindex">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Taireru LLC Redirect</title>
+    <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
     <style>
-        /* Basic reset and centering */
+        /* Reset and full-page layout */
         * {
             margin: 0;
             padding: 0;
@@ -23,6 +25,17 @@
             align-items: center;
             text-align: center;
             padding: 20px;
+            overflow: hidden;
+        }
+
+        /* Fade-in animation */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
         }
 
         h1 {
@@ -32,7 +45,7 @@
 
         p {
             font-size: 1.2rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             line-height: 1.5;
         }
 
@@ -40,22 +53,35 @@
             color: #00ffff;
             font-weight: bold;
         }
+
+        .countdown {
+            font-size: 1.1rem;
+            color: #ffcc00;
+            margin-top: 1rem;
+        }
     </style>
     <script>
-        // Redirect after 5 seconds
-        setTimeout(() => {
-            window.location.href = "https://uniplex.vercel.app";
-        }, 5000);
+        let countdown = 5; // seconds
+        function updateCountdown() {
+            document.getElementById('countdown').textContent = countdown;
+            if (countdown <= 0) {
+                window.location.href = "https://uniplex.vercel.app";
+            } else {
+                countdown--;
+                setTimeout(updateCountdown, 1000);
+            }
+        }
+        window.onload = updateCountdown;
     </script>
 </head>
 <body>
-    <div>
+    <div class="fade-in">
         <h1>Notice</h1>
         <p>
             <span class="highlight">Taireru LLC</span> is no longer active.  
             We have rebranded and our new home is the <span class="highlight">Uniplex</span> website.
         </p>
-        <p>You will be redirected shortly...</p>
+        <p>You will be redirected in <span id="countdown" class="countdown">5</span> seconds...</p>
     </div>
 </body>
 </html>
